@@ -36,8 +36,9 @@ export default function(): JSX.Element {
                 // return (axios as any)[method](url, data, config);
                 data = JSON.parse(data);
                 return (axios as any)({
-                    url, 
-                    data, 
+                    url,
+                    method,
+                    data,
                     config
                 });
             },
