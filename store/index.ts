@@ -2,6 +2,7 @@ import {types, getEnv, applySnapshot, getSnapshot} from 'mobx-state-tree';
 import {PageStore} from './Page';
 import {when, reaction} from 'mobx';
 import axios from 'axios';
+import {toast} from 'amis';
 let pagIndex = 1;
 export const MainStore = types
     .model('MainStore', {
@@ -86,6 +87,10 @@ export const MainStore = types
             let page = self.pages[index];
             axios.post(`http://localhost:1337/page/edit/${page.path}`, {
                 data: page
+            }).then(() => {
+                toast.success("发送成功", '系统消息');
+            }).catch(err => {
+                toast.error(err, '系统错误');
             })
         }
 
